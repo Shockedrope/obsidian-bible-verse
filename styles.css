@@ -1,0 +1,51 @@
+/* ESV Bible Plugin Styles */
+
+.esv-input-container {
+  margin-bottom: 20px;
+}
+
+.esv-reference-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  background: var(--background-primary);
+  color: var(--text-normal);
+}
+
+.esv-reference-input:focus {
+  outline: none;
+  border-color: var(--interactive-accent);
+  box-shadow: 0 0 0 2px var(--interactive-accent-hover);
+}
+
+.esv-button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.esv-button-container button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-secondary);
+  color: var(--text-normal);
+  cursor: pointer;
+}
+
+.esv-button-container button:hover {
+  background: var(--background-secondary-alt);
+}
+
+.esv-button-container button.mod-cta {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-color: var(--interactive-accent);
+}
+
+.esv-button-container button.mod-cta:hover {
+  background: var(--interactive-accent-hover);
+}
