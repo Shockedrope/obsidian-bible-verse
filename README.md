@@ -6,6 +6,7 @@ An Obsidian plugin that allows you to insert ESV Bible verses directly into your
 
 - **Insert Bible verses** directly into your notes with a simple command
 - **Select a reference** in your note and convert it to the full verse text
+- **Search for verses** by topic or keyword (e.g. "verse about trusting God"), preview, then insert
 - **Customizable formatting** options for verse display
 - Support for single verses, verse ranges, and entire chapters
 
@@ -48,6 +49,16 @@ An Obsidian plugin that allows you to insert ESV Bible verses directly into your
 2. Search for "Insert Bible verse"
 3. Enter a Bible reference (e.g., "John 3:16", "Romans 8:28-30", "Psalm 23")
 4. Press Enter or click "Insert Verse"
+
+### Search for a Verse
+
+1. Open the command palette (`Ctrl/Cmd + P`)
+2. Search for "Search Bible verses"
+3. Type what you're looking for, e.g. "find me the verse about anxiety" or "trusting God"
+4. Pick a result with the arrow keys and press Enter to preview the full passage
+5. Press Enter again (or click "Insert") to add it to your note, or "Back to results" to keep looking
+
+Results combine a built-in list of common topics (anxiety, forgiveness, hope, and more) with live ESV keyword search. Typing a reference like "John 3:16" skips the search and goes straight to the preview. Search is keyword-based, so it matches the words in the verse rather than the idea behind them. The number of results shown can be changed in settings (default 5).
 
 ### Insert from Selected Text
 

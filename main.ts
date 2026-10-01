@@ -9,6 +9,7 @@ import {
   Setting,
   requestUrl,
 } from "obsidian";
+import { BibleSearchModal } from "./src/search";
 
 interface ESVBibleSettings {
   apiKey: string;
@@ -17,6 +18,7 @@ interface ESVBibleSettings {
   includeHeadings: boolean;
   includeShortCopyright: boolean;
   indentPoetry: boolean;
+  searchResultCount: number;
 }
 
 const DEFAULT_SETTINGS: ESVBibleSettings = {
@@ -26,6 +28,7 @@ const DEFAULT_SETTINGS: ESVBibleSettings = {
   includeHeadings: true,
   includeShortCopyright: true,
   indentPoetry: true,
+  searchResultCount: 5,
 };
 
 export default class ESVBiblePlugin extends Plugin {
@@ -54,6 +57,15 @@ export default class ESVBiblePlugin extends Plugin {
         } else {
           new Notice("Please select a Bible reference first");
         }
+      },
+    });
+
+    // Add command to search for verses by keyword or topic
+    this.addCommand({
+      id: "search-bible-verses",
+      name: "Search Bible verses",
+      editorCallback: (editor: Editor, view: MarkdownView) => {
+        new BibleSearchModal(this.app, this, editor).open();
       },
     });
 
@@ -124,10 +136,14 @@ export default class ESVBiblePlugin extends Plugin {
     notice.hide();
 
     if (verse) {
-      const cursor = editor.getCursor();
-      editor.replaceRange(`\n${verse}\n`, cursor);
-      new Notice("Verse inserted!");
+      this.insertText(editor, verse);
     }
+  }
+
+  insertText(editor: Editor, verse: string) {
+    const cursor = editor.getCursor();
+    editor.replaceRange(`\n${verse}\n`, cursor);
+    new Notice("Verse inserted!");
   }
 }
 
@@ -297,6 +313,22 @@ class ESVBibleSettingTab extends PluginSettingTab {
           })
       );
 
+    containerEl.createEl("h3", { text: "Search" });
+
+    new Setting(containerEl)
+      .setName("Search results to show")
+      .setDesc("How many verses to list when using \"Search Bible verses\"")
+      .addSlider((slider) =>
+        slider
+          .setLimits(1, 20, 1)
+          .setValue(this.plugin.settings.searchResultCount)
+          .setDynamicTooltip()
+          .onChange(async (value) => {
+            this.plugin.settings.searchResultCount = value;
+            await this.plugin.saveSettings();
+          })
+      );
+
     containerEl.createEl("h3", { text: "Usage" });
     const usageDiv = containerEl.createDiv();
     usageDiv.createEl("p", {
@@ -308,6 +340,9 @@ class ESVBibleSettingTab extends PluginSettingTab {
     });
     ul.createEl("li", {
       text: '"Insert verse from selected reference" - Inserts the verse for selected text',
+    });
+    ul.createEl("li", {
+      text: '"Search Bible verses" - Find verses by topic or keyword, preview, then insert',
     });
 
     usageDiv.createEl("p", { text: "Example references:" });

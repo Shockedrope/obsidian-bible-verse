@@ -49,3 +49,54 @@
 .esv-button-container button.mod-cta:hover {
   background: var(--interactive-accent-hover);
 }
+
+/* Verse search */
+
+.esv-search-result {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.esv-search-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.esv-search-reference {
+  font-weight: 600;
+}
+
+.esv-search-badge {
+  font-size: var(--font-ui-smaller);
+  padding: 0 6px;
+  border-radius: 8px;
+  background: var(--background-modifier-hover);
+  color: var(--text-muted);
+}
+
+.esv-search-snippet {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.esv-search-snippet mark {
+  background: var(--text-highlight-bg);
+  color: var(--text-normal);
+  border-radius: 2px;
+}
+
+.esv-preview-body {
+  white-space: pre-wrap;
+  max-height: 50vh;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--interactive-accent);
+  background: var(--background-secondary);
+}
